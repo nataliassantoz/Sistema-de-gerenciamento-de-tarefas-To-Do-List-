@@ -18,7 +18,7 @@ import com.example.todolist.service.TodoService;
  * @RestController, serve para receber aquisicoes HTTP e devolver respostas(json). Dessa forma, o @REstController, diz que a classe é responsavel por receber requisicoes e devolve-las.
  * @RequestMapping(), serve para define o prefixo da URL para todos os endpoints dentro do controller.
  * @GetMapping(),Cria um endpoint do tipo GET (mostrar informações)
- * @PostMapping(), Cria um endpoint do tipo POST (enviar algo).
+ * @PostMapping(), Cria um endpoint do tipo POST (enviar/criar algo).
  */
 @RestController
 @RequestMapping("/todos")
@@ -30,6 +30,7 @@ public class TodoController {
     }
 
     @PostMapping 
+    //@RequestBody Todo todo → os dados da tarefa virão no corpo da requisição.
     List<Todo> criar( @RequestBody Todo todo){
     return todoService.criar(todo);
     }
@@ -40,10 +41,13 @@ public class TodoController {
     }
     
     @PutMapping
+    //@RequestBody Todo todo → A tarefa com as novas informações vem no corpo da requisição.
     List<Todo> atualizar(@RequestBody Todo todo){
         return todoService.atualizar(todo);
     }
 
+    /*@DeleteMapping("{id}") → Cria um endpoint DELETE que recebe um ID.
+     * @PathVariable Long id → Captura o ID da URL (exemplo: /todos/3 deleta a tarefa com ID 3). */
     @DeleteMapping("{id}")
     List<Todo> deletar(@PathVariable Long id){
         return todoService.deletar(id);
