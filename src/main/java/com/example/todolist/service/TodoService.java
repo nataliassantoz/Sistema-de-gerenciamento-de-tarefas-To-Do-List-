@@ -12,7 +12,7 @@ import com.example.todolist.repository.TodoRepository;
 @Service
 public class TodoService {
 
-    private TodoRepository todoRepository;
+    private final TodoRepository todoRepository;
     /*passando o objeto da interface todoRepository para o construtor, que por sua vez, estende o 
      JpaRepositorie<Todo, Long>, onde oferece metodos prontos para interagir com o bando de dados.*/
     public TodoService(TodoRepository todoRepository){

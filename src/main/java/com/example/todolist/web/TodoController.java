@@ -23,33 +23,33 @@ import com.example.todolist.service.TodoService;
 @RestController
 @RequestMapping("/todos")
 public class TodoController {
-    private TodoService todoService;
+    private final TodoService todoService;
 
     public TodoController( TodoService todoService){
         this.todoService = todoService;
     }
 
+//@RequestBody Todo todo → os dados da tarefa virão no corpo da requisição.
     @PostMapping 
-    //@RequestBody Todo todo → os dados da tarefa virão no corpo da requisição.
-    List<Todo> criar( @RequestBody Todo todo){
+    public List<Todo> criar(@RequestBody Todo todo){
     return todoService.criar(todo);
     }
 
     @GetMapping()
-    List<Todo> listar(){
+    public List<Todo> listar(){
         return todoService.listar();
     }
     
     @PutMapping
     //@RequestBody Todo todo → A tarefa com as novas informações vem no corpo da requisição.
-    List<Todo> atualizar(@RequestBody Todo todo){
+    public List<Todo> atualizar(@RequestBody Todo todo){
         return todoService.atualizar(todo);
     }
 
     /*@DeleteMapping("{id}") → Cria um endpoint DELETE que recebe um ID.
      * @PathVariable Long id → Captura o ID da URL (exemplo: /todos/3 deleta a tarefa com ID 3). */
     @DeleteMapping("{id}")
-    List<Todo> deletar(@PathVariable Long id){
+    public List<Todo> deletar(@PathVariable Long id){
         return todoService.deletar(id);
     }
 }
