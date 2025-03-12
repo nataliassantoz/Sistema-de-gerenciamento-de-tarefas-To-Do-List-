@@ -40,10 +40,10 @@ public class TodoController {
         return todoService.listar();
     }
     
-    @PutMapping
+    @PutMapping("/{id}")
     //@RequestBody Todo todo → A tarefa com as novas informações vem no corpo da requisição.
-    public List<Todo> atualizar(@RequestBody Todo todo){
-        return todoService.atualizar(todo);
+    public List<Todo> atualizar(@PathVariable Long id, @RequestBody Todo todo){
+        return todoService.atualizar(id, todo);
     }
 
     /*@DeleteMapping("{id}") → Cria um endpoint DELETE que recebe um ID.

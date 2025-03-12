@@ -37,10 +37,22 @@ public class TodoService {
         // findé um método do Spring Data JPA,retorna uma lista com todos os registros da tabela correspondente à entidade Todo.
         return todoRepository.findAll(sort);
     }
+    
+    public List<Todo> atualizar(Long id, Todo todo){
+        //buscando a todo no banco de dados
+        Todo tarefaExistente = todoRepository.findById(id).orElse(null);
 
-    public List<Todo> atualizar(Todo todo){
         //salva a atualizacao que houve no todo e lista os todos atualizados
-        todoRepository.save(todo);
+        if (tarefaExistente != null) {
+        // Atualiza os campos da tarefa existente
+        tarefaExistente.setNome(todo.getNome());
+        tarefaExistente.setDescricao(todo.getDescricao());
+        tarefaExistente.setPrioridade(todo.getPrioridade());
+        tarefaExistente.setRealizado(todo.isRealizado());
+        
+        // Salva a tarefa atualizada no banco
+        todoRepository.save(tarefaExistente);
+    }
         return listar();
     }
 
